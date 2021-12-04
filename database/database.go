@@ -22,6 +22,6 @@ func SelectValueByIndex(idx string) string {
 }
 
 func Queue(idx string) {
-	queue.Add(idx, "Processing")
+	queue.Add(idx, "processing")
 	queue.Publish(idx)
 }

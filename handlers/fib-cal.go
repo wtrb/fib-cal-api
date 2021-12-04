@@ -17,13 +17,17 @@ func FibCal(c *gin.Context) {
 			"error": err.Error(),
 		})
 		return
-	} else if n >= 100 {
+	} else if n >= 90 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "index must be lower than 100",
+			"error": "index must be lower than 90",
 		})
 		return
 	}
 
 	db.InsertValue(idx)
 	db.Queue(idx)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "processing",
+	})
 }

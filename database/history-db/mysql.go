@@ -51,9 +51,10 @@ func init() {
 	dbDatabase := os.Getenv("MYSQL_DATABASE")
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUsername, dbPassword, dbHost, dbPort, dbDatabase)
 
-	db, err := sql.Open("mysql", dataSourceName)
-	if err != nil {
+	if d, err := sql.Open("mysql", dataSourceName); err != nil {
 		panic(err.Error())
+	} else {
+		db = d
 	}
 
 	if _, err := db.Exec("CREATE TABLE IF NOT EXISTS history (entry char(3))"); err != nil {
